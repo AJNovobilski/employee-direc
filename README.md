@@ -1,3 +1,6 @@
+Sort by clicking the column name at the top of the page.
+
+
 # Unit 19 React Homework: Employee Directory
 
 ## Overview
