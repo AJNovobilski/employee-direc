@@ -1,25 +1,56 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import axios from 'axios'
+import ReactTable from "react-table"; 
+import 'react-table/react-table.css'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default class App extends Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      users: [],
+      loading:true
+    }
+  }
+  async getUsersData(){
+    const res = await axios.get('https://jsonplaceholder.typicode.com/users')
+    console.log(res.data)
+    this.setState({loading:false, users: res.data})
+  }
+  componentDidMount(){
+    this.getUsersData()
+  }
+  render() {
+    const columns = [{  
+      Header: 'ID',  
+      accessor: 'id',
+     }
+     ,{  
+      Header: 'Name',  
+      accessor: 'name' ,
+      }
+     
+     ,{  
+     Header: 'Username',  
+     accessor: 'username' ,
+     }
+     ,{  
+     Header: 'Phone',  
+     accessor: 'phone',
+     },
+     {  
+      Header: 'Email',  
+      accessor: 'email',
+      },
+      {  
+        Header: 'Website',  
+        accessor: 'website',
+        }
+  ]
+    return (
+      <ReactTable  
+      data={this.state.users}  
+      columns={columns}  
+   />
+    )
+  }
 }
-
-export default App;
