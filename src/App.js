@@ -13,15 +13,18 @@ export default class App extends Component {
     }
   }
 
+  
+
 
   async getUsersData(){
-    const res = await axios.get('https://randomuser.me/api/?results=20')
+    const res = await axios.get('https://randomuser.me/api/?results=1000')
     console.log(res.data.results)
     this.setState({loading:false, users: res.data.results})
   }
   componentDidMount(){
     this.getUsersData()
   }
+  
 
   render() {
     const columns = [
